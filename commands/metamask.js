@@ -17,7 +17,7 @@ const {
 } = require('../pages/metamask/notification-page');
 const { setNetwork, getNetwork } = require('../helpers');
 
-let walletAddress;
+let walletAddress, initialized;
 
 module.exports = {
   walletAddress: () => {
@@ -172,6 +172,7 @@ module.exports = {
     return walletAddress;
   },
   initialSetup: async ({ secretWords, network, password }) => {
+    if (initialized) return true;
     if (secretWords === undefined && process.env.SECRET_WORDS) {
       secretWords = process.env.SECRET_WORDS;
     }
